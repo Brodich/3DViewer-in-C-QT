@@ -9,6 +9,9 @@
 #include <fcntl.h>
 #include <math.h>
 
+
+#define SIZE_BUFFER 512
+
 typedef struct facets {
 	int* vertexes;
 	int numbers_of_vertexes_in_facets;
@@ -27,6 +30,13 @@ typedef struct matrix_struct {
   int columns;
 } matrix_t;
 
+void init_matrix(matrix_t *matrix);
+int st_create_matrix(int rows, int columns, matrix_t *result);
+void get_parse_data (data_t* parse_data, char* pathtofile);
+void     get_matrix_and_polygon(matrix_t* matrix, polygon_t* polygon, char* pathtofile);
+int get_count_vertex_polygon (char* pt_str);
+
+
 
 
 int read_vertex(matrix_t* coordinates_dots, char* str_arr, int* i);
@@ -36,7 +46,9 @@ void ft_print_polygons(polygon_t* polygons, int count_of_facets);
 
 typedef enum Code_errors {
     SUCCESS = 1,
-    VERTEX_MISS = -1
+    VERTEX_MISS = -1,
+	INCORRECT_MATRIX = -1,
+	FAIL = -1
 } Error_e;
 
 #endif
