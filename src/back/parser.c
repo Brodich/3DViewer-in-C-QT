@@ -15,7 +15,7 @@ int main() {
     st_create_matrix(parse_data.count_of_vertexes + 1, 3, &matrix);
     polygons = (polygon_t*) calloc(parse_data.count_of_facets, sizeof(polygon_t));
 
-    get_matrix_and_polygon(&matrix, &polygons, pathtofile);
+    get_matrix_and_polygon(&matrix, polygons, pathtofile);
 
 
     printf("z %d\n", parse_data.count_of_vertexes);
@@ -52,26 +52,30 @@ void     get_matrix_and_polygon(matrix_t* matrix, polygon_t* polygon, char* path
             }
             row++;
         }
-        else if (line[0] == 'f' && line[1] == ' ') {
-            polygon[index_polygon].numbers_of_vertexes_in_facets = get_count_vertex_polygon(pt_line);
-            polygon[index_polygon].vertexes = (int*)calloc(polygon[index_polygon].numbers_of_vertexes_in_facets, sizeof(int));
-            while (*pt_line != '\n') {
-                if (*pt_line >= '0' && *pt_line <= '9') {
-                    polygon[index_polygon].vertexes[vertex] = strtol(pt_line, &pt_line, 10);
-                    if (flag == SUCCESS) {
-                        first_vertex_polygon = polygon[index_polygon].vertexes[vertex];
-                        flag = FAIL;
-                    } else {
-                        polygon[index_polygon].vertexes[vertex + 1] = polygon[index_polygon].vertexes[vertex];
-                        vertex++;
-                    }
-                    vertex++;
-                }
-                pt_line++;
-            }
-            flag = SUCCESS;
-            index_polygon++;
-        }
+        // else if (line[0] == 'f' && line[1] == ' ') {
+        //     polygon[index_polygon].numbers_of_vertexes_in_facets = get_count_vertex_polygon(pt_line);
+        //     polygon[index_polygon].vertexes = (int*)calloc(polygon[index_polygon].numbers_of_vertexes_in_facets, sizeof(int));
+        //     while (*pt_line != '\n') {
+        //         if (*pt_line >= '0' && *pt_line <= '9') {
+        //             polygon[index_polygon].vertexes[vertex] = strtol(pt_line, &pt_line, 10);
+        //             if (flag == SUCCESS) {
+        //                 first_vertex_polygon = polygon[index_polygon].vertexes[vertex];
+        //                 flag = FAIL;
+        //             } else if (vertex == polygon[index_polygon].numbers_of_vertexes_in_facets) {
+        //                 polygon[index_polygon].vertexes[vertex] = first_vertex_polygon;
+        //             } 
+        //             else if (vertex < polygon[index_polygon].numbers_of_vertexes_in_facets){
+        //                 polygon[index_polygon].vertexes[vertex + 1] = polygon[index_polygon].vertexes[vertex];
+        //                 vertex++;
+        //             }
+        //             vertex++;
+        //         }
+        //         pt_line++;
+        //     }
+        //     vertex = 0;
+        //     flag = SUCCESS;
+        //     index_polygon++;
+        // }
     }
     free(line);
 }
@@ -82,7 +86,7 @@ int get_count_vertex_polygon (char* pt_str) {
     while (*pt_str != 0) {
         if(*pt_str >= '0' && *pt_str <= '9'){
             count++;
-            while(*pt_str >= '0' && *pt_str <= '9' || *pt_str == '.') {
+            while((*pt_str >= '0' && *pt_str <= '9') || (*pt_str == '.')) {
                 pt_str++;
             }
         }
@@ -93,6 +97,7 @@ int get_count_vertex_polygon (char* pt_str) {
     }
     return (count);
 }
+
 void get_parse_data (data_t* parse_data, char* pathtofile) {
     FILE* fd;
     fd = fopen(pathtofile, "r");
