@@ -3,6 +3,7 @@
 
 int main() {
 
+  // C++
     data_t parse_data = {0};
     char* pathtofile = "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/test.obj";
 
