@@ -61,37 +61,40 @@ int main() {
         // printf("get count vertex polygon %d\n", polygons[i].numbers_of_vertexes_in_facets);
         polygons[i].vertexes = (int*)calloc(polygons[i].numbers_of_vertexes_in_facets, sizeof(int));
         // f 1 3 5 
-        polygons[0].vertexes[0] = 1;
-        polygons[0].vertexes[1] = 3;
-        polygons[0].vertexes[2] = 3;
-        polygons[0].vertexes[3] = 5;
-        polygons[0].vertexes[4] = 5;
-        polygons[0].vertexes[5] = 1;
+        // polygons[0].vertexes[0] = 1;
+        // polygons[0].vertexes[1] = 3;
+        // polygons[0].vertexes[2] = 3;
+        // polygons[0].vertexes[3] = 5;
+        // polygons[0].vertexes[4] = 5;
+        // polygons[0].vertexes[5] = 1;
 
 
-        while (*pt_line != '\n') {
+        while (*pt_line != 0) {
+          printf("ptline |%s|\n", pt_line);
           if (*pt_line >= '0' && *pt_line <= '9') {
-                    printf("z1 |%s", pt_line);
+                    // printf("z1 |%s", pt_line);
 
             polygons[i].vertexes[vertex] = strtol(pt_line, &pt_line, 10);
-            printf("f |%d|\n", polygons[i].vertexes[vertex]);
-                    printf("z2 |%s\n", pt_line);
+            // polygons[i].vertexes[vertex] = vertex;
 
-            // polygons[i].vertexes[vertex] = 1;
-            // if (flag == SUCCESS) {
-            //     first_vertex_polygon = polygons[i].vertexes[vertex];
-            //     flag = FAIL;
-            // }
-            // if (vertex == polygons[i].numbers_of_vertexes_in_facets) {
-            //     polygons[i].vertexes[vertex] = first_vertex_polygon;
-            // } 
-            // if (vertex < polygons[i].numbers_of_vertexes_in_facets){
-            //     polygons[i].vertexes[vertex + 1] = polygons[i].vertexes[vertex];
-            //     vertex++;
-            // }
+            // printf("f |%d|\n", polygons[i].vertexes[vertex]);
+            // printf("z2 |%s\n", pt_line);
+            
+            // printf("ver %d\n", vertex);
+            // printf("pol %d\n", polygons[i].numbers_of_vertexes_in_facets);
+            if (flag == SUCCESS) {
+              first_vertex_polygon = polygons[i].vertexes[vertex];
+              flag = FAIL;
+            }
+            else if (vertex < polygons[i].numbers_of_vertexes_in_facets){
+              polygons[i].vertexes[vertex + 1] = polygons[i].vertexes[vertex];
+              vertex++;
+            }
             vertex++;
           }
+          polygons[i].vertexes[vertex] = first_vertex_polygon;
           pt_line++;
+
         }
 
 
