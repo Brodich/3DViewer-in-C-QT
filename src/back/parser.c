@@ -44,7 +44,7 @@ void get_polygon(FILE* fd, int count_of_facets, polygon_t** polygons) {
         while (*pt_line != 0) {
           // printf("ptline |%s|\n", pt_line);
           if (*pt_line >= '0' && *pt_line <= '9') {
-            (*polygons)[i].vertexes[vertex] = strtol(pt_line, &pt_line, 10);
+            (*polygons)[i].vertexes[vertex] = strtol(pt_line, &pt_line, 10) - 1;
             if (flag == SUCCESS) {
               first_vertex_polygon = (*polygons)[i].vertexes[vertex];
               flag = FAIL;
