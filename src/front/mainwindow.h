@@ -3,6 +3,12 @@
 
 #include <QMainWindow>
 
+extern "C"
+{
+    #include "../back/parser.h"
+}
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE

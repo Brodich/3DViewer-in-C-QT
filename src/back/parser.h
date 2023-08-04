@@ -1,5 +1,5 @@
-#ifndef VIEWER_H
-#define VIEWER_H
+#ifndef PARSER_H
+#define PARSER_H
 
 // commmon.h
 #include <stdio.h>
@@ -32,7 +32,7 @@ typedef struct matrix_struct {
 
 void init_matrix(matrix_t *matrix);
 int st_create_matrix(int rows, int columns, matrix_t *result);
-void get_parse_data (data_t* parse_data, char* pathtofile);
+void get_parse_data (data_t* parse_data, char const* pathtofile);
 // void     get_matrix_and_polygon(matrix_t* matrix, polygon_t* polygon, char* pathtofile);
 int get_count_vertex_polygon (char* pt_str);
 void get_polygon(FILE* fd, int count_of_facets, polygon_t** polygons);

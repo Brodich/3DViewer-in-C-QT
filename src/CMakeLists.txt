@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(viewer VERSION 0.1 LANGUAGES CXX)
+project(viewer VERSION 0.1 LANGUAGES CXX C)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -11,21 +11,35 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+
+include_directories(
+    ${CMAKE_SOURCE_DIR}/back
+    ${CMAKE_SOURCE_DIR}/front
+    ${CMAKE_SOURCE_DIR}
+)
+
+set(CMAKE_AUTOUIC_SEARCH_PATHS)
+
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+
+        front/main.cpp
+        front/mainwindow.cpp
+        front/mainwindow.h
+        front/mainwindow.ui
+
+        back/parser.h
+        back/parser.c
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(viewer
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-    )
+)
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET viewer APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
