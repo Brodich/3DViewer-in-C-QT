@@ -34,12 +34,13 @@ void init_matrix(matrix_t *matrix);
 int st_create_matrix(int rows, int columns, matrix_t *result);
 void get_parse_data (data_t* parse_data, char const* pathtofile);
 // void     get_matrix_and_polygon(matrix_t* matrix, polygon_t* polygon, char* pathtofile);
-int get_count_vertex_polygon (char* pt_str);
+int get_vertices(FILE* fd, int count_of_vertexes, double** vertices);
 void get_polygon(FILE* fd, int count_of_facets, polygon_t** polygons);
-void get_matrix(FILE* fd, int count_of_vertexes, matrix_t* matrix);
+int get_count_vertex_polygon (char* pt_str);
+// void get_matrix(FILE* fd, int count_of_vertexes, matrix_t* matrix);
 
-void ft_print_matrix(matrix_t mat);
-
+// void ft_print_matrix(matrix_t mat);
+void ft_print_vertices(double* vertices, int count_of_facets);
 
 
 int read_vertex(matrix_t* coordinates_dots, char* str_arr, int* i);

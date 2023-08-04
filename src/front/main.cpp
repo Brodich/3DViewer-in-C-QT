@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
     // Need for double number dot instead of comma
-//      setlocale(LC_NUMERIC, "C");
+      setlocale(LC_NUMERIC, "C");
+
     return a.exec();
 }
