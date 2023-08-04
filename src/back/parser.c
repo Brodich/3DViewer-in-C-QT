@@ -11,15 +11,13 @@ int main() {
 
     matrix_t matrix; // free
     double* vertices; // free
-    int* facets;
     
-    facets = (int*)malloc(1 * sizeof(int));
     vertices = (double*)calloc(parse_data.count_of_vertexes * 3, sizeof(double));
 
-    get_facets(fd, parse_data.count_of_facets, &facets);
 
 
     polygon_t* polygons; // free
+    polygon_t poly;
     st_create_matrix(parse_data.count_of_vertexes, 3, &matrix);
     polygons = (polygon_t*) calloc(parse_data.count_of_facets, sizeof(polygon_t));
 
@@ -28,6 +26,9 @@ int main() {
     get_vertices(fd, parse_data.count_of_vertexes, &vertices);
 
     // get_matrix(fd, parse_data.count_of_vertexes, &matrix);
+
+      get_poly(fd, parse_data.count_of_facets, &poly);
+
     get_polygon(fd, parse_data.count_of_facets, &polygons);
 
     printf("z %d\n", parse_data.count_of_vertexes);
@@ -36,8 +37,18 @@ int main() {
     ft_print_vertices(vertices, parse_data.count_of_vertexes);
 
     // ft_print_matrix(matrix);
+    // ft_print_poly(poly);
+
     ft_print_polygons(polygons, parse_data.count_of_facets);
     return (0);
+}
+
+void ft_print_poly(polygon_t polygons) {
+  int i = 0;
+  while (i < polygons.numbers_of_vertexes_in_facets) {
+    printf("%d ", polygons.vertexes[i]);
+    i++;
+  }
 }
 
 void get_polygon(FILE* fd, int count_of_facets, polygon_t** polygons) {
@@ -80,7 +91,7 @@ void get_polygon(FILE* fd, int count_of_facets, polygon_t** polygons) {
     free(line);
 }
 
-void get_facets(FILE* fd, int count_of_facets, int** facets) {
+void get_poly(FILE* fd, int count_of_facets, polygon_t* polygons) {
     int vertex = 0;
     Error_e flag = SUCCESS;
     int first_vertex_polygon = 0;
@@ -88,28 +99,29 @@ void get_facets(FILE* fd, int count_of_facets, int** facets) {
     size_t length = 512;
     char* line = (char*)calloc(SIZE_BUFFER, sizeof(char));
     char* pt_line = NULL;
+    polygons->numbers_of_vertexes_in_facets = 0;
     while (i < count_of_facets) {
       getline(&line, &length, fd);
       pt_line = line;
       if (line[0] == 'f' && line[1] == ' ') {
-        (*polygons)[i].numbers_of_vertexes_in_facets = get_count_vertex_polygon(line);
-          if ((*polygons)[i].numbers_of_vertexes_in_facets > 0)
-        (*polygons)[i].vertexes = (int*)calloc((*polygons)[i].numbers_of_vertexes_in_facets, sizeof(int));
+        polygons->numbers_of_vertexes_in_facets = polygons->numbers_of_vertexes_in_facets + get_count_vertex_polygon(line);
+          if (polygons->numbers_of_vertexes_in_facets > 0)
+        polygons->vertexes = (int*)calloc(polygons->numbers_of_vertexes_in_facets, sizeof(int));
         while (*pt_line != 0) {
           // printf("ptline |%s|\n", pt_line);
           if (*pt_line >= '0' && *pt_line <= '9') {
-            (*polygons)[i].vertexes[vertex] = strtol(pt_line, &pt_line, 10) - 1;
+            polygons->vertexes[vertex] = strtol(pt_line, &pt_line, 10) - 1;
             if (flag == SUCCESS) {
-              first_vertex_polygon = (*polygons)[i].vertexes[vertex];
+              first_vertex_polygon = polygons->vertexes[vertex];
               flag = FAIL;
             }
-            else if (vertex < (*polygons)[i].numbers_of_vertexes_in_facets){
-              (*polygons)[i].vertexes[vertex + 1] = (*polygons)[i].vertexes[vertex];
+            else if (vertex < polygons->numbers_of_vertexes_in_facets){
+              polygons->vertexes[vertex + 1] = polygons->vertexes[vertex];
               vertex++;
             }
             vertex++;
           }
-          (*polygons)[i].vertexes[vertex] = first_vertex_polygon;
+          polygons->vertexes[vertex] = first_vertex_polygon;
           pt_line++;
         }
         vertex = 0;
