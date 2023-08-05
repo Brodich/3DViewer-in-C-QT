@@ -5,7 +5,9 @@ int main() {
 
   // C++
     data_t parse_data = {0};
-    char* pathtofile = "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/test.obj";
+    // char* pathtofile = "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/test.obj";
+    // char* pathtofile = "assets/test.obj";
+    char* pathtofile = "/home/qni/Brodichgit/3DViewer-in-C-QT/src/assets/test.obj";
 
     get_parse_data(&parse_data, pathtofile);
 
@@ -28,25 +30,33 @@ int main() {
     // get_matrix(fd, parse_data.count_of_vertexes, &matrix);
 
       get_poly(fd, parse_data.count_of_facets, &poly);
-
-    get_polygon(fd, parse_data.count_of_facets, &polygons);
+    
+    fclose(fd);
+    // get_polygon(fd, parse_data.count_of_facets, &polygons);
 
     printf("z %d\n", parse_data.count_of_vertexes);
     printf("z %d\n", parse_data.count_of_facets);
 
-    ft_print_vertices(vertices, parse_data.count_of_vertexes);
+    // ft_print_vertices(vertices, parse_data.count_of_vertexes);
 
     // ft_print_matrix(matrix);
-    // ft_print_poly(poly);
+    ft_print_poly(poly);
 
-    ft_print_polygons(polygons, parse_data.count_of_facets);
+    // ft_print_polygons(polygons, parse_data.count_of_facets);
     return (0);
 }
 
 void ft_print_poly(polygon_t polygons) {
   int i = 0;
+  int j = 0;
   while (i < polygons.numbers_of_vertexes_in_facets) {
+       if (j == 6) {
+        printf("\n");
+        j = 0;
+    } 
     printf("%d ", polygons.vertexes[i]);
+
+    j++;
     i++;
   }
 }
@@ -99,32 +109,40 @@ void get_poly(FILE* fd, int count_of_facets, polygon_t* polygons) {
     size_t length = 512;
     char* line = (char*)calloc(SIZE_BUFFER, sizeof(char));
     char* pt_line = NULL;
+    int vertex_in_facet = 0;
+    int index_vertex = 1;
+
     polygons->numbers_of_vertexes_in_facets = 0;
     while (i < count_of_facets) {
       getline(&line, &length, fd);
       pt_line = line;
       if (line[0] == 'f' && line[1] == ' ') {
-        polygons->numbers_of_vertexes_in_facets = polygons->numbers_of_vertexes_in_facets + get_count_vertex_polygon(line);
+        vertex_in_facet = get_count_vertex_polygon(line);
+        polygons->numbers_of_vertexes_in_facets = polygons->numbers_of_vertexes_in_facets + vertex_in_facet;
           if (polygons->numbers_of_vertexes_in_facets > 0)
-        polygons->vertexes = (int*)calloc(polygons->numbers_of_vertexes_in_facets, sizeof(int));
+        polygons->vertexes = (int*)realloc(polygons->vertexes, polygons->numbers_of_vertexes_in_facets * sizeof(int));
+                  // printf("ptline |%s\n", pt_line);
         while (*pt_line != 0) {
-          // printf("ptline |%s|\n", pt_line);
           if (*pt_line >= '0' && *pt_line <= '9') {
-            polygons->vertexes[vertex] = strtol(pt_line, &pt_line, 10) - 1;
+            polygons->vertexes[vertex] = strtol(pt_line, &pt_line, 10);
             if (flag == SUCCESS) {
               first_vertex_polygon = polygons->vertexes[vertex];
               flag = FAIL;
             }
-            else if (vertex < polygons->numbers_of_vertexes_in_facets){
+            else if (index_vertex < vertex_in_facet){
               polygons->vertexes[vertex + 1] = polygons->vertexes[vertex];
+              index_vertex++;
               vertex++;
             }
+            index_vertex++;
             vertex++;
           }
-          polygons->vertexes[vertex] = first_vertex_polygon;
           pt_line++;
         }
-        vertex = 0;
+        polygons->vertexes[vertex] = first_vertex_polygon;
+        vertex++;
+          // printf("indexver %d\n", index_vertex);
+        index_vertex = 1;
         flag = SUCCESS;
         i++;
       }

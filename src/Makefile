@@ -4,7 +4,7 @@ TARGET      := $(TARGET_DIR)/3DViewer
 SRC_DIR     := $(MKFILE_PATH)
 SRC_STRIPPED:= back/parser.c 
 SRC         := $(SRC_DIR)/$(SRC_STRIPPED)
-CFLAGS      := --debug -Wall -Wextra
+CFLAGS      := --debug -Wall -Wextra -g
 
 all: info
 	-@mkdir $(TARGET_DIR)
