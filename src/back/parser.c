@@ -12,7 +12,6 @@ int main() {
     get_parse_data(&parse_data, pathtofile);
 
     polygon_t polygons; // free
-    polygon_t poly;
     double* vertices; // free
     vertices = (double*)calloc(parse_data.count_of_vertexes * 3, sizeof(double));
 
@@ -28,7 +27,7 @@ int main() {
     printf("z %d\n", parse_data.count_of_facets);
 
     // ft_print_vertices(vertices, parse_data.count_of_vertexes);
-    
+
     ft_print_polygons(polygons, 6);
 
     return (0);
