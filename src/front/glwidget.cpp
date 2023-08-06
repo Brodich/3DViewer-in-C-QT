@@ -1,6 +1,6 @@
-#include "glwidget.h"
+//#include "glwidget.h"
 
-glwidget::glwidget()
-{
+//glwidget::glwidget()
+//{
 
-}
+//}

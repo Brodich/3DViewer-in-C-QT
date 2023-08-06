@@ -1,40 +1,40 @@
 #include "parser.h"
 
 
-int main() {
+//int main() {
 
-  // C++
-    data_t parse_data = {0};
-    char* pathtofile = "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/test.obj";
-    // char* pathtofile = "assets/test.obj";
-    // char* pathtofile = "/home/qni/Brodichgit/3DViewer-in-C-QT/src/assets/test.obj";
+//// C++
+//  data_t parse_data = {0};
+//  char* pathtofile = "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/test.obj";
+//  // char* pathtofile = "assets/test.obj";
+//  // char* pathtofile = "/home/qni/Brodichgit/3DViewer-in-C-QT/src/assets/test.obj";
 
-    get_parse_data(&parse_data, pathtofile);
+//  get_parse_data(&parse_data, pathtofile);
 
-    polygon_t polygons; // free
-    double* vertices = NULL; // free
+//  polygon_t polygons; // free
+//  double* vertices = NULL; // free
 
-    FILE* fd;
-    fd = fopen(pathtofile, "r");
+//  FILE* fd;
+//  fd = fopen(pathtofile, "r");
 
-    get_vertices(fd, parse_data.count_of_vertexes, &vertices);
-    get_polygons(fd, parse_data.count_of_facets, &polygons);
+//  get_vertices(fd, parse_data.count_of_vertexes, &vertices);
+//  get_polygons(fd, parse_data.count_of_facets, &polygons);
     
-    fclose(fd);
+//  fclose(fd);
 
-    printf("z %d\n", parse_data.count_of_vertexes);
-    printf("z %d\n", parse_data.count_of_facets);
+//  printf("z %d\n", parse_data.count_of_vertexes);
+//  printf("z %d\n", parse_data.count_of_facets);
 
-    ft_print_vertices(vertices, parse_data.count_of_vertexes);
-    ft_print_polygons(polygons, 6);
+//  ft_print_vertices(vertices, parse_data.count_of_vertexes);
+//  ft_print_polygons(polygons, 6);
 
-    if (vertices)
-      free(vertices);
-    if (polygons.vertexes)
-      free(polygons.vertexes);
+//  if (vertices)
+//    free(vertices);
+//  if (polygons.vertexes)
+//    free(polygons.vertexes);
 
-    return (0);
-}
+//  return (0);
+//}
 
 void get_polygons(FILE* fd, int count_of_facets, polygon_t* polygons) {
     int vertex = 0;
@@ -53,6 +53,7 @@ void get_polygons(FILE* fd, int count_of_facets, polygon_t* polygons) {
       getline(&line, &length, fd);
       pt_line = line;
       if (line[0] == 'f' && line[1] == ' ') {
+                    // printf("pt %s\n", pt_line);
         vertex_in_facet = get_count_vertex_polygon(line);
         polygons->numbers_of_vertexes_in_facets = polygons->numbers_of_vertexes_in_facets + vertex_in_facet;
           if (polygons->numbers_of_vertexes_in_facets > 0)
@@ -72,6 +73,12 @@ void get_polygons(FILE* fd, int count_of_facets, polygon_t* polygons) {
             }
             index_vertex++;
             vertex++;
+            // problem
+            while(*pt_line != ' ' && *pt_line != '\0' && *pt_line != '\n') {
+              printf("pt %c\n", *pt_line);
+              pt_line++;
+            }
+            //
           }
           pt_line++;
         }
