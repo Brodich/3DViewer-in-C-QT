@@ -5,15 +5,14 @@ int main() {
 
   // C++
     data_t parse_data = {0};
-    // char* pathtofile = "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/test.obj";
+    char* pathtofile = "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/test.obj";
     // char* pathtofile = "assets/test.obj";
-    char* pathtofile = "/home/qni/Brodichgit/3DViewer-in-C-QT/src/assets/test.obj";
+    // char* pathtofile = "/home/qni/Brodichgit/3DViewer-in-C-QT/src/assets/test.obj";
 
     get_parse_data(&parse_data, pathtofile);
 
     polygon_t polygons; // free
-    double* vertices; // free
-    vertices = (double*)calloc(parse_data.count_of_vertexes * 3, sizeof(double));
+    double* vertices = NULL; // free
 
     FILE* fd;
     fd = fopen(pathtofile, "r");
@@ -26,9 +25,13 @@ int main() {
     printf("z %d\n", parse_data.count_of_vertexes);
     printf("z %d\n", parse_data.count_of_facets);
 
-    // ft_print_vertices(vertices, parse_data.count_of_vertexes);
-
+    ft_print_vertices(vertices, parse_data.count_of_vertexes);
     ft_print_polygons(polygons, 6);
+
+    if (vertices)
+      free(vertices);
+    if (polygons.vertexes)
+      free(polygons.vertexes);
 
     return (0);
 }
@@ -40,6 +43,7 @@ void get_polygons(FILE* fd, int count_of_facets, polygon_t* polygons) {
     int i = 0;
     size_t length = 512;
     char* line = (char*)calloc(SIZE_BUFFER, sizeof(char));
+    polygons->vertexes = (int*)malloc(sizeof(int) * 1);
     char* pt_line = NULL;
     int vertex_in_facet = 0;
     int index_vertex = 1;
@@ -87,14 +91,17 @@ int get_vertices(FILE* fd, int count_of_vertexes, double** vertices) {
   Error_e code = SUCCESS;
   size_t length = 512;
   char* line = (char*)calloc(SIZE_BUFFER, sizeof(char));
+  (*vertices) = (double*)malloc(sizeof(double) * 1);
+  int size = 1;
   char* pt_line = NULL;
   int j = 0;
-
   int xyz = 0;
   while (i < count_of_vertexes) {
     getline(&line, &length, fd);
     pt_line = line;
     if (line[0] == 'v' && line[1] == ' ') {
+      size += 3;
+      (*vertices) = (double*)realloc((*vertices), size * sizeof(double));
       while (xyz != 3 && *pt_line != '\n') {
         if (*pt_line >= '0' && *pt_line <= '9') {
             (*vertices)[j] = strtod(pt_line, &pt_line);
@@ -157,57 +164,6 @@ void get_parse_data (data_t* parse_data, const char *pathtofile) {
     free(line);
     fclose(fd);
 }
-
-
-
-int st_create_matrix(int rows, int columns, matrix_t *result) {
-  Error_e code = SUCCESS;
-  result->columns = columns;
-  result->rows = rows;
-  if (rows <= 0 || columns <= 0) {
-    code = INCORRECT_MATRIX;
-    result->matrix = NULL;
-  } else {
-    result->matrix = (float **)malloc(rows * sizeof(float *));
-    int i = 0;
-    while (i < rows) {
-      result->matrix[i] = (float *)malloc(columns * sizeof(float));
-      i++;
-    }
-    init_matrix(result);
-  }
-  return (code);
-}
-
-void init_matrix(matrix_t *matrix) {
-  int i = 0;
-  int j = 0;
-  while (i < (matrix)->rows) {
-    while (j < (matrix)->columns) {
-      (matrix)->matrix[i][j] = 0;
-      j++;
-    }
-    j = 0;
-    i++;
-  }
-}
-
-void ft_print_matrix(matrix_t mat) {
-  int i = 0;
-  int j = 0;
-  while (i < mat.rows) {
-    printf("(%d)", i);
-    while (j < mat.columns) {
-      printf(" %.16f ", mat.matrix[i][j]);
-      j++;
-    }
-    printf("\n");
-    j = 0;
-    i++;
-  }
-}
-
-
 
 void ft_print_vertices(double* vertices, int count_of_facets) {
   int i = 0;
