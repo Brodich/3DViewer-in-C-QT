@@ -1,40 +1,41 @@
 #include "parser.h"
 
 
-//int main() {
+int main() {
 
-//// C++
-//  data_t parse_data = {0};
-//  char* pathtofile = "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/test.obj";
-//  // char* pathtofile = "assets/test.obj";
-//  // char* pathtofile = "/home/qni/Brodichgit/3DViewer-in-C-QT/src/assets/test.obj";
+// C++
+ data_t parse_data = {0};
+ char* pathtofile = "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/test.obj";
+ // char* pathtofile = "assets/test.obj";
+ // char* pathtofile = "/home/qni/Brodichgit/3DViewer-in-C-QT/src/assets/test.obj";
 
-//  get_parse_data(&parse_data, pathtofile);
+ get_parse_data(&parse_data, pathtofile);
 
-//  polygon_t polygons; // free
-//  double* vertices = NULL; // free
+ polygon_t polygons; // free
+ double* vertices = NULL; // free
 
-//  FILE* fd;
-//  fd = fopen(pathtofile, "r");
+ FILE* fd;
+ fd = fopen(pathtofile, "r");
 
-//  get_vertices(fd, parse_data.count_of_vertexes, &vertices);
-//  get_polygons(fd, parse_data.count_of_facets, &polygons);
+ get_vertices(fd, parse_data.count_of_vertexes, &vertices);
+ get_polygons(fd, parse_data.count_of_facets, &polygons);
     
-//  fclose(fd);
+ fclose(fd);
 
-//  printf("z %d\n", parse_data.count_of_vertexes);
-//  printf("z %d\n", parse_data.count_of_facets);
+ printf("z %d\n", parse_data.count_of_vertexes);
+ printf("z %d\n", parse_data.count_of_facets);
 
-//  ft_print_vertices(vertices, parse_data.count_of_vertexes);
-//  ft_print_polygons(polygons, 6);
+ ft_print_vertices(vertices, parse_data.count_of_vertexes);
+ printf("a %d\n", polygons.numbers_of_vertexes_in_facets);
+ ft_print_polygons(polygons, 6);
 
-//  if (vertices)
-//    free(vertices);
-//  if (polygons.vertexes)
-//    free(polygons.vertexes);
+ if (vertices)
+   free(vertices);
+ if (polygons.vertexes)
+   free(polygons.vertexes);
 
-//  return (0);
-//}
+ return (0);
+}
 
 void get_polygons(FILE* fd, int count_of_facets, polygon_t* polygons) {
     int vertex = 0;
@@ -53,8 +54,10 @@ void get_polygons(FILE* fd, int count_of_facets, polygon_t* polygons) {
       getline(&line, &length, fd);
       pt_line = line;
       if (line[0] == 'f' && line[1] == ' ') {
+        // printf("- ");
                     // printf("pt %s\n", pt_line);
         vertex_in_facet = get_count_vertex_polygon(line);
+        printf("get = %d\n", vertex_in_facet);
         polygons->numbers_of_vertexes_in_facets = polygons->numbers_of_vertexes_in_facets + vertex_in_facet;
           if (polygons->numbers_of_vertexes_in_facets > 0)
         polygons->vertexes = (int*)realloc(polygons->vertexes, polygons->numbers_of_vertexes_in_facets * sizeof(int));
@@ -62,6 +65,7 @@ void get_polygons(FILE* fd, int count_of_facets, polygon_t* polygons) {
         while (*pt_line != 0) {
           if (*pt_line >= '0' && *pt_line <= '9') {
             polygons->vertexes[vertex] = strtol(pt_line, &pt_line, 10);
+
             if (flag == SUCCESS) {
               first_vertex_polygon = polygons->vertexes[vertex];
               flag = FAIL;
@@ -73,9 +77,8 @@ void get_polygons(FILE* fd, int count_of_facets, polygon_t* polygons) {
             }
             index_vertex++;
             vertex++;
-            // problem
+            // fix
             while(*pt_line != ' ' && *pt_line != '\0' && *pt_line != '\n') {
-              printf("pt %c\n", *pt_line);
               pt_line++;
             }
             //
@@ -89,6 +92,7 @@ void get_polygons(FILE* fd, int count_of_facets, polygon_t* polygons) {
         flag = SUCCESS;
         i++;
       }
+      
     }
     free(line);
 }
@@ -139,9 +143,10 @@ int get_count_vertex_polygon (char* pt_str) {
         if(*pt_str >= '0' && *pt_str <= '9'){
             // printf("check");
             count++;
-            while((*pt_str >= '0' && *pt_str <= '9') || (*pt_str == '.')) {
-                pt_str++;
+            while(*pt_str != ' ' && *pt_str != '\0') {
+              pt_str++;
             }
+            pt_str--;
         }
         pt_str++;
     }
@@ -196,7 +201,7 @@ void ft_print_vertices(double* vertices, int count_of_facets) {
 void ft_print_polygons(polygon_t polygons, int vertex_in_facet) {
   int i = 0;
   int j = 0;
-  while (i < polygons.numbers_of_vertexes_in_facets) {
+  while (i < polygons.numbers_of_vertexes_in_facets) { // polygons.numbers_of_vertexes_in_facets
        if (j == vertex_in_facet) {
         printf("\n");
         j = 0;
