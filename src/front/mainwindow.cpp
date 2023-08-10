@@ -31,11 +31,18 @@ MainWindow::MainWindow(QWidget *parent)
     ft_print_vertices(vertices, parse_data.count_of_vertexes);
     ft_print_polygons(polygons, 6);
 
+
+
+//    glClearColor(1.0, 1.0, 1.0, 1.0);
+
+
+//    paint();
+//    glwidget
+//    glwidget::paintGL();
     if (vertices)
       free(vertices);
     if (polygons.vertexes)
       free(polygons.vertexes);
-
 
 }
 

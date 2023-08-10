@@ -19,7 +19,7 @@
 
 // get_vertices(fd, parse_data.count_of_vertexes, &vertices);
 // get_polygons(fd, parse_data.count_of_facets, &polygons);
-    
+
 // fclose(fd);
 
 // printf("z %d\n", parse_data.count_of_vertexes);
@@ -57,14 +57,13 @@ void get_polygons(FILE* fd, int count_of_facets, polygon_t* polygons) {
         // printf("- ");
                     // printf("pt %s\n", pt_line);
         vertex_in_facet = get_count_vertex_polygon(line);
-        printf("get = %d\n", vertex_in_facet);
         polygons->numbers_of_vertexes_in_facets = polygons->numbers_of_vertexes_in_facets + vertex_in_facet;
           if (polygons->numbers_of_vertexes_in_facets > 0)
         polygons->vertexes = (int*)realloc(polygons->vertexes, polygons->numbers_of_vertexes_in_facets * sizeof(int));
                   // printf("ptline |%s\n", pt_line);
         while (*pt_line != 0) {
           if (*pt_line >= '0' && *pt_line <= '9') {
-            polygons->vertexes[vertex] = strtol(pt_line, &pt_line, 10);
+            polygons->vertexes[vertex] = strtol(pt_line, &pt_line, 10) - 1;
 
             if (flag == SUCCESS) {
               first_vertex_polygon = polygons->vertexes[vertex];
@@ -92,7 +91,7 @@ void get_polygons(FILE* fd, int count_of_facets, polygon_t* polygons) {
         flag = SUCCESS;
         i++;
       }
-      
+
     }
     free(line);
 }
@@ -196,8 +195,8 @@ void ft_print_vertices(double* vertices, int count_of_facets) {
 
 
 /// @brief output in terminal all polygons, index start from 1, index 0 = trash
-/// @param polygons 
-/// @param count_of_facets count 
+/// @param polygons
+/// @param count_of_facets count
 void ft_print_polygons(polygon_t polygons, int vertex_in_facet) {
   int i = 0;
   int j = 0;
@@ -205,7 +204,7 @@ void ft_print_polygons(polygon_t polygons, int vertex_in_facet) {
        if (j == vertex_in_facet) {
         printf("\n");
         j = 0;
-    } 
+    }
     printf("%d ", polygons.vertexes[i]);
 
     j++;

@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <locale.h>
 
+//#define GL_SILENCE_DEPRECATION
+#define DIMENTION_COUNT 3
+
 extern "C"
 {
     #include "../back/parser.h"
