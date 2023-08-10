@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     data_t parse_data = {0};
-    char const* pathtofile = "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/test.obj";
+    char const* pathtofile = "/Users/eusebiaa/Projects/3DViewer-in-C-QT/src/assets/test.obj";
     // char* pathtofile = "assets/test.obj";
     // char* pathtofile = "/home/qni/Brodichgit/3DViewer-in-C-QT/src/assets/test.obj";
 
