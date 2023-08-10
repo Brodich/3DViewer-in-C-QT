@@ -35,8 +35,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 //    glClearColor(1.0, 1.0, 1.0, 1.0);
 
+//    if (polygons.vertexes != NULL)
+//    ui->modelWindow->paint();
 
-//    paint();
 //    glwidget
 //    glwidget::paintGL();
     if (vertices)
