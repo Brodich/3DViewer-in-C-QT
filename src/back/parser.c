@@ -3,8 +3,12 @@
 int main() {
   // C++
   data_t parse_data = {0};
-  char* pathtofile =
-      "../src/assets/square.obj";
+//  char const* pathtofile =
+//      "../src/assets/square.obj";
+//   char* pathtofile = "assets/test.obj";
+
+   char const* pathtofile =
+   "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/cube2.obj";
 
   get_parse_data(&parse_data, pathtofile);
 
@@ -83,8 +87,11 @@ void get_polygons(FILE* fd, int amount_polygons, polygon_t* polygons) {
         }
         pt_line++;
       }
-      polygons->vertices[vertex] = first_vertex_polygon;
-      vertex++;
+      if (vertex_in_facet > 2) {
+        polygons->vertices[vertex] = first_vertex_polygon;
+        vertex++;
+      }
+
       // printf("indexver %d\n", index_vertex);
       index_vertex = 1;
       flag = SUCCESS;

@@ -59,6 +59,8 @@ void glwidget::paintGL() {
     glDisableClientState(GL_VERTEX_ARRAY);
 
 
+//    ft_print_vertices(vertices, parse_data.amount_vertices);
+//    ft_print_polygons(polygons);
 
 
 //    glEnable(GL_DEPTH_TEST);
@@ -66,7 +68,7 @@ void glwidget::paintGL() {
 
 //    glVertexPointer(DIMENTION_COUNT, GL_DOUBLE, 0, vertices);
 
-//    glDrawElements(GL_LINES, polygons.numbers_of_vertexes_in_facets - 1, GL_UNSIGNED_INT, polygons.vertexes);
+//    glDrawElements(GL_LINES, polygons.number_of_vertices - 1, GL_UNSIGNED_INT, polygons.vertices);
 //    glDisableClientState(GL_VERTEX_ARRAY);
 
     update();
