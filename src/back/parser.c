@@ -1,39 +1,39 @@
 #include "parser.h"
 
-// int main() {
-//   // C++
-//   data_t parse_data = {0};
-//   char* pathtofile =
-//       "/Users/eusebiaa/Projects/3DViewer-in-C-QT/src/assets/square.obj";
-//   get_parse_data(&parse_data, pathtofile);
+int main() {
+  // C++
+  data_t parse_data = {0};
+  char* pathtofile =
+      "/Users/eusebiaa/Projects/3DViewer-in-C-QT/src/assets/square.obj";
+  get_parse_data(&parse_data, pathtofile);
 
-//   polygon_t polygons;       // free
-//   double* vertices = NULL;  // free
+  polygon_t polygons;       // free
+  double* vertices = NULL;  // free
 
-//   FILE* fd;
-//   fd = fopen(pathtofile, "r");
+  FILE* fd;
+  fd = fopen(pathtofile, "r");
 
-//   get_vertices(fd, parse_data.amount_vertices, &vertices);
-//   get_polygons(fd, parse_data.amount_polygons, &polygons);
+  get_vertices(fd, parse_data.amount_vertices, &vertices);
+  get_polygons(fd, parse_data.amount_polygons, &polygons);
 
-//   fclose(fd);
+  fclose(fd);
 
-//   printf("amount_vertices: %d\n", parse_data.amount_vertices);
-//   printf("amount_polygons: %d\n", parse_data.amount_polygons);
+  printf("amount_vertices: %d\n", parse_data.amount_vertices);
+  printf("amount_polygons: %d\n", parse_data.amount_polygons);
 
-//   ft_print_vertices(vertices, parse_data.amount_vertices);
-//   printf("number_of_connections: %d\n", polygons.number_of_connections);
-//   ft_print_polygons(polygons);
+  ft_print_vertices(vertices, parse_data.amount_vertices);
+  printf("number_of_connections: %d\n", polygons.number_of_connections);
+  ft_print_polygons(polygons);
 
-//   if (vertices) {
-//     free(vertices);
-//   }
-//   if (polygons.vertices) {
-//     free(polygons.vertices);
-//   }
+  if (vertices) {
+    free(vertices);
+  }
+  if (polygons.vertices) {
+    free(polygons.vertices);
+  }
 
-//   return (0);
-// }
+  return (0);
+}
 
 void get_polygons(FILE* fd, int amount_polygons, polygon_t* polygons) {
   int vertex = 0;
@@ -110,7 +110,7 @@ int get_vertices(FILE* fd, int amount_vertices, double** vertices) {
       size += 3;
       (*vertices) = (double*)realloc((*vertices), size * sizeof(double));
       while (xyz != 3 && *pt_line != '\n') {
-        if (*pt_line >= '0' && *pt_line <= '9') {
+        if (*pt_line >= '0' && *pt_line <= '9' || *pt_line == '-') {
           (*vertices)[j] = strtod(pt_line, &pt_line);
           // matrix->matrix[row][xyz] = strtod(pt_line, &pt_line); // f 1/1/0
           // 3/2/1 4/4/2
