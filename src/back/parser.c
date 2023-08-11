@@ -5,10 +5,6 @@ int main() {
   data_t parse_data = {0};
   char* pathtofile =
       "/Users/eusebiaa/Projects/3DViewer-in-C-QT/src/assets/square.obj";
-  // char* pathtofile = "assets/test.obj";
-  // char* pathtofile =
-  // "/home/qni/Brodichgit/3DViewer-in-C-QT/src/assets/test.obj";
-
   get_parse_data(&parse_data, pathtofile);
 
   polygon_t polygons;       // free
@@ -26,9 +22,8 @@ int main() {
   printf("amount_polygons: %d\n", parse_data.amount_polygons);
 
   ft_print_vertices(vertices, parse_data.amount_vertices);
-  printf("numbers_of_vertices_in_facets: %d\n",
-         polygons.numbers_of_vertices_in_facets);
-  ft_print_polygons(polygons, polygons.numbers_of_vertices_in_facets);
+  printf("number_of_connections: %d\n", polygons.number_of_connections);
+  ft_print_polygons(polygons);
 
   if (vertices) {
     free(vertices);
@@ -52,7 +47,7 @@ void get_polygons(FILE* fd, int amount_polygons, polygon_t* polygons) {
   int vertex_in_facet = 0;
   int index_vertex = 1;
 
-  polygons->numbers_of_vertices_in_facets = 0;
+  polygons->number_of_connections = 0;
   while (i < amount_polygons) {
     getline(&line, &length, fd);
     pt_line = line;
@@ -60,11 +55,10 @@ void get_polygons(FILE* fd, int amount_polygons, polygon_t* polygons) {
       // printf("- ");
       // printf("pt %s\n", pt_line);
       vertex_in_facet = get_count_vertex_polygon(line);
-      polygons->numbers_of_vertices_in_facets += vertex_in_facet;
-      if (polygons->numbers_of_vertices_in_facets > 0)
+      polygons->number_of_connections += vertex_in_facet;
+      if (polygons->number_of_connections > 0)
         polygons->vertices = (int*)realloc(
-            polygons->vertices,
-            polygons->numbers_of_vertices_in_facets * sizeof(int));
+            polygons->vertices, polygons->number_of_connections * sizeof(int));
       // printf("ptline |%s\n", pt_line);
       while (*pt_line != 0) {
         if (*pt_line >= '0' && *pt_line <= '9') {
@@ -197,19 +191,9 @@ void ft_print_vertices(double* vertices, int amount_polygons) {
 
 /// @brief output in terminal all polygons, index start from 1, index 0 = trash
 /// @param polygons
-/// @param amount_vertices_to_connect count
-void ft_print_polygons(polygon_t polygons, int amount_vertices_to_connect) {
+void ft_print_polygons(polygon_t polygons) {
   int i = 0;
-  int j = 0;
-  // polygons.numbers_of_vertices_in_facets
-  while (i < polygons.numbers_of_vertices_in_facets) {
-    if (j == amount_vertices_to_connect) {
-      printf("\n");
-      j = 0;
-    }
-    printf("%d ", polygons.vertices[i]);
-
-    j++;
-    i++;
+  while (i < polygons.number_of_connections) {
+    printf("%d ", polygons.vertices[i++]);
   }
 }

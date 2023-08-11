@@ -12,7 +12,7 @@
 
 typedef struct facets {
 	int* vertices;
-	int numbers_of_vertices_in_facets;
+	int number_of_connections;
 } polygon_t;
 
 typedef struct data {
@@ -29,7 +29,7 @@ void get_polygons(FILE* fd, int amount_polygons, polygon_t* polygons);
 int get_count_vertex_polygon (char* pt_str);
 
 void ft_print_vertices(double* vertices, int amount_polygons);
-void ft_print_polygons(polygon_t polygons, int amount_vertices_to_connect);
+void ft_print_polygons(polygon_t polygons);
 
 typedef enum Code_errors {
     SUCCESS = 1,
