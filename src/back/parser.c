@@ -28,7 +28,7 @@ int main() {
   ft_print_vertices(vertices, parse_data.amount_vertices);
   printf("numbers_of_vertices_in_facets: %d\n",
          polygons.numbers_of_vertices_in_facets);
-  ft_print_polygons(polygons, 6);
+  ft_print_polygons(polygons, polygons.numbers_of_vertices_in_facets);
 
   if (vertices) {
     free(vertices);
