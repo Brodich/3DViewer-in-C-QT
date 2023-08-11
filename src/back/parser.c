@@ -1,39 +1,39 @@
 #include "parser.h"
 
-int main() {
-  // C++
-  data_t parse_data = {0};
-  char* pathtofile =
-      "/Users/eusebiaa/Projects/3DViewer-in-C-QT/src/assets/square.obj";
-  get_parse_data(&parse_data, pathtofile);
+// int main() {
+//   // C++
+//   data_t parse_data = {0};
+//   char* pathtofile =
+//       "/Users/eusebiaa/Projects/3DViewer-in-C-QT/src/assets/square.obj";
+//   get_parse_data(&parse_data, pathtofile);
 
-  polygon_t polygons;       // free
-  double* vertices = NULL;  // free
+//   polygon_t polygons;       // free
+//   double* vertices = NULL;  // free
 
-  FILE* fd;
-  fd = fopen(pathtofile, "r");
+//   FILE* fd;
+//   fd = fopen(pathtofile, "r");
 
-  get_vertices(fd, parse_data.amount_vertices, &vertices);
-  get_polygons(fd, parse_data.amount_polygons, &polygons);
+//   get_vertices(fd, parse_data.amount_vertices, &vertices);
+//   get_polygons(fd, parse_data.amount_polygons, &polygons);
 
-  fclose(fd);
+//   fclose(fd);
 
-  printf("amount_vertices: %d\n", parse_data.amount_vertices);
-  printf("amount_polygons: %d\n", parse_data.amount_polygons);
+//   printf("amount_vertices: %d\n", parse_data.amount_vertices);
+//   printf("amount_polygons: %d\n", parse_data.amount_polygons);
 
-  ft_print_vertices(vertices, parse_data.amount_vertices);
-  printf("number_of_connections: %d\n", polygons.number_of_connections);
-  ft_print_polygons(polygons);
+//   ft_print_vertices(vertices, parse_data.amount_vertices);
+//   printf("number_of_vertices: %d\n", polygons.number_of_vertices);
+//   ft_print_polygons(polygons);
 
-  if (vertices) {
-    free(vertices);
-  }
-  if (polygons.vertices) {
-    free(polygons.vertices);
-  }
+//   if (vertices) {
+//     free(vertices);
+//   }
+//   if (polygons.vertices) {
+//     free(polygons.vertices);
+//   }
 
-  return (0);
-}
+//   return (0);
+// }
 
 void get_polygons(FILE* fd, int amount_polygons, polygon_t* polygons) {
   int vertex = 0;
@@ -47,7 +47,7 @@ void get_polygons(FILE* fd, int amount_polygons, polygon_t* polygons) {
   int vertex_in_facet = 0;
   int index_vertex = 1;
 
-  polygons->number_of_connections = 0;
+  polygons->number_of_vertices = 0;
   while (i < amount_polygons) {
     getline(&line, &length, fd);
     pt_line = line;
@@ -55,10 +55,10 @@ void get_polygons(FILE* fd, int amount_polygons, polygon_t* polygons) {
       // printf("- ");
       // printf("pt %s\n", pt_line);
       vertex_in_facet = get_count_vertex_polygon(line);
-      polygons->number_of_connections += vertex_in_facet;
-      if (polygons->number_of_connections > 0)
+      polygons->number_of_vertices += vertex_in_facet;
+      if (polygons->number_of_vertices > 0)
         polygons->vertices = (int*)realloc(
-            polygons->vertices, polygons->number_of_connections * sizeof(int));
+            polygons->vertices, polygons->number_of_vertices * sizeof(int));
       // printf("ptline |%s\n", pt_line);
       while (*pt_line != 0) {
         if (*pt_line >= '0' && *pt_line <= '9') {
@@ -193,7 +193,7 @@ void ft_print_vertices(double* vertices, int amount_polygons) {
 /// @param polygons
 void ft_print_polygons(polygon_t polygons) {
   int i = 0;
-  while (i < polygons.number_of_connections) {
+  while (i < polygons.number_of_vertices) {
     printf("%d ", polygons.vertices[i++]);
   }
 }

@@ -12,7 +12,7 @@
 
 typedef struct facets {
 	int* vertices;
-	int number_of_connections;
+	int number_of_vertices;
 } polygon_t;
 
 typedef struct data {

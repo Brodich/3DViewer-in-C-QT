@@ -9,9 +9,6 @@ MainWindow::MainWindow(QWidget* parent)
   data_t parse_data = {0};
   char const* pathtofile =
       "/Users/eusebiaa/Projects/3DViewer-in-C-QT/src/assets/square.obj";
-  // char* pathtofile = "assets/test.obj";
-  // char* pathtofile =
-  // "/home/qni/Brodichgit/3DViewer-in-C-QT/src/assets/test.obj";
 
   get_parse_data(&parse_data, pathtofile);
 
@@ -20,26 +17,28 @@ MainWindow::MainWindow(QWidget* parent)
 
   FILE* fd;
   fd = fopen(pathtofile, "r");
-
   get_vertices(fd, parse_data.amount_vertices, &vertices);
   get_polygons(fd, parse_data.amount_polygons, &polygons);
-
   fclose(fd);
 
-  printf("amount_vertices: %d\n", parse_data.amount_vertices);
-  printf("amount_polygons: %d\n", parse_data.amount_polygons);
+  // printf("amount_vertices: %d\n", parse_data.amount_vertices);
+  // printf("amount_polygons: %d\n", parse_data.amount_polygons);
 
   ft_print_vertices(vertices, parse_data.amount_vertices);
   int amount_vertices_to_connect = 4;
   ft_print_polygons(polygons);
 
-  //    glClearColor(1.0, 1.0, 1.0, 1.0);
+    //  glClearColor(1.0, 1.0, 1.0, 1.0);
 
-  //    if (polygons.vertexes != NULL)
-  //    ui->modelWindow->paint();
+    //  if (polygons.vertices != NULL)
+    //  ui->modelWindow->paint();
 
-  //    glwidget
-  //    glwidget::paintGL();
+    //  glwidget
+    //  glwidget::paintGL();
+
+
+
+  
   if (vertices) {
     free(vertices);
   }

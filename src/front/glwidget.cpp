@@ -20,7 +20,7 @@ void glwidget::resizeGL(int weight, int height) {
 }
 
 void glwidget::paintGL() {
-
+    
     double* vert = (double*) malloc( 12 * sizeof(double));
     vert[0] = -0.5;
     vert[1] = -0.5;
@@ -38,8 +38,6 @@ void glwidget::paintGL() {
     vert[10] = 0.5;
     vert[11] = 0;
 
-
-
     int* poly = (int*)malloc(4 * sizeof(int));
 
     poly[0] = 0;
@@ -48,7 +46,8 @@ void glwidget::paintGL() {
     poly[2] = 2;
     poly[3] = 3;
 
-//    printf("affffff\n");
+
+
 
     glEnable(GL_DEPTH_TEST);
     glEnableClientState(GL_VERTEX_ARRAY);
@@ -57,8 +56,6 @@ void glwidget::paintGL() {
 
     glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, poly);
     glDisableClientState(GL_VERTEX_ARRAY);
-
-
 
 
 //    glEnable(GL_DEPTH_TEST);
