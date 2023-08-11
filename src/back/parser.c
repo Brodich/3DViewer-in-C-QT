@@ -23,7 +23,7 @@ int main() {
   printf("amount_polygons: %d\n", parse_data.amount_polygons);
 
   ft_print_vertices(vertices, parse_data.amount_vertices);
-  printf("number_of_connections: %d\n", polygons.number_of_connections);
+  printf("number_of_vertices: %d\n", polygons.number_of_vertices);
   ft_print_polygons(polygons);
 
   if (vertices) {
@@ -48,7 +48,7 @@ void get_polygons(FILE* fd, int amount_polygons, polygon_t* polygons) {
   int vertex_in_facet = 0;
   int index_vertex = 1;
 
-  polygons->number_of_connections = 0;
+  polygons->number_of_vertices = 0;
   while (i < amount_polygons) {
     getline(&line, &length, fd);
     pt_line = line;
@@ -56,10 +56,10 @@ void get_polygons(FILE* fd, int amount_polygons, polygon_t* polygons) {
       // printf("- ");
       // printf("pt %s\n", pt_line);
       vertex_in_facet = get_count_vertex_polygon(line);
-      polygons->number_of_connections += vertex_in_facet;
-      if (polygons->number_of_connections > 0)
+      polygons->number_of_vertices += vertex_in_facet;
+      if (polygons->number_of_vertices > 0)
         polygons->vertices = (int*)realloc(
-            polygons->vertices, polygons->number_of_connections * sizeof(int));
+            polygons->vertices, polygons->number_of_vertices * sizeof(int));
       // printf("ptline |%s\n", pt_line);
       while (*pt_line != 0) {
         if (*pt_line >= '0' && *pt_line <= '9') {
@@ -111,7 +111,7 @@ int get_vertices(FILE* fd, int amount_vertices, double** vertices) {
       size += 3;
       (*vertices) = (double*)realloc((*vertices), size * sizeof(double));
       while (xyz != 3 && *pt_line != '\n') {
-        if (*pt_line >= '0' && *pt_line <= '9' || *pt_line == '-') {
+        if ((*pt_line >= '0' && *pt_line <= '9') || *pt_line == '-') {
           (*vertices)[j] = strtod(pt_line, &pt_line);
           // matrix->matrix[row][xyz] = strtod(pt_line, &pt_line); // f 1/1/0
           // 3/2/1 4/4/2
@@ -194,7 +194,7 @@ void ft_print_vertices(double* vertices, int amount_polygons) {
 /// @param polygons
 void ft_print_polygons(polygon_t polygons) {
   int i = 0;
-  while (i < polygons.number_of_connections) {
+  while (i < polygons.number_of_vertices) {
     printf("%d ", polygons.vertices[i++]);
   }
 }
