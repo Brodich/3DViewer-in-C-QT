@@ -7,13 +7,15 @@ MainWindow::MainWindow(QWidget* parent)
   ui->setupUi(this);
 
   data_t parse_data = {0};
+
 //  char const* pathtofile =
 //      "../src/assets/square.obj";
   // char* pathtofile = "assets/test.obj";
    char const* pathtofile =
-   "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/cube.obj";
+   "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/cube2.obj";
 
   get_parse_data(&parse_data, pathtofile);
+
 
   polygon_t polygons;       // free
   double* vertices = NULL;  // free
@@ -29,13 +31,14 @@ MainWindow::MainWindow(QWidget* parent)
   printf("amount_vertices: %d\n", parse_data.amount_vertices);
   printf("amount_polygons: %d\n", parse_data.amount_polygons);
 
-  ft_print_vertices(vertices, parse_data.amount_vertices);
-  ft_print_polygons(polygons);
+//  ft_print_vertices(vertices, parse_data.amount_vertices);
+//  ft_print_polygons(polygons);
 
   //    glClearColor(1.0, 1.0, 1.0, 1.0);
 
-//      if (polygons.vertices != NULL)
-//      ui->modelWindow->paint();
+
+      if (polygons.vertices != NULL)
+      ui->modelWindow->paint();
 
   //    glwidget
   //    glwidget::paintGL();

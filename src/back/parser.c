@@ -1,44 +1,44 @@
 #include "parser.h"
 
-int main() {
-  // C++
-  data_t parse_data = {0};
-//  char const* pathtofile =
-//      "../src/assets/square.obj";
-//   char* pathtofile = "assets/test.obj";
+// int main() {
+//   // C++
+//   data_t parse_data = {0};
+// //  char const* pathtofile =
+// //      "../src/assets/square.obj";
+// //   char* pathtofile = "assets/test.obj";
 
-   char const* pathtofile =
-   "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/cube2.obj";
+//    char const* pathtofile =
+//    "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/cube2.obj";
 
-  get_parse_data(&parse_data, pathtofile);
+//   get_parse_data(&parse_data, pathtofile);
 
-  polygon_t polygons;       // free
-  double* vertices = NULL;  // free
+//   polygon_t polygons;       // free
+//   double* vertices = NULL;  // free
 
-  FILE* fd;
-  fd = fopen(pathtofile, "r");
+//   FILE* fd;
+//   fd = fopen(pathtofile, "r");
 
-  get_vertices(fd, parse_data.amount_vertices, &vertices);
-  get_polygons(fd, parse_data.amount_polygons, &polygons);
+//   get_vertices(fd, parse_data.amount_vertices, &vertices);
+//   get_polygons(fd, parse_data.amount_polygons, &polygons);
 
-  fclose(fd);
+//   fclose(fd);
 
-  printf("amount_vertices: %d\n", parse_data.amount_vertices);
-  printf("amount_polygons: %d\n", parse_data.amount_polygons);
+//   printf("amount_vertices: %d\n", parse_data.amount_vertices);
+//   printf("amount_polygons: %d\n", parse_data.amount_polygons);
 
-  ft_print_vertices(vertices, parse_data.amount_vertices);
-  printf("number_of_vertices: %d\n", polygons.number_of_vertices);
-  ft_print_polygons(polygons);
+//   ft_print_vertices(vertices, parse_data.amount_vertices);
+//   printf("number_of_vertices: %d\n", polygons.number_of_vertices);
+//   ft_print_polygons(polygons);
 
-  if (vertices) {
-    free(vertices);
-  }
-  if (polygons.vertices) {
-    free(polygons.vertices);
-  }
+//   if (vertices) {
+//     free(vertices);
+//   }
+//   if (polygons.vertices) {
+//     free(polygons.vertices);
+//   }
 
-  return (0);
-}
+//   return (0);
+// }
 
 void get_polygons(FILE* fd, int amount_polygons, polygon_t* polygons) {
   int vertex = 0;
