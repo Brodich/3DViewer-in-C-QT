@@ -4,7 +4,8 @@ int main() {
   // C++
   data_t parse_data = {0};
   char* pathtofile =
-      "/Users/eusebiaa/Projects/3DViewer-in-C-QT/src/assets/square.obj";
+      "../src/assets/square.obj";
+
   get_parse_data(&parse_data, pathtofile);
 
   polygon_t polygons;       // free
