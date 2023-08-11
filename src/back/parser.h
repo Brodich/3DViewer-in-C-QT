@@ -11,25 +11,25 @@
 #define SIZE_BUFFER 512
 
 typedef struct facets {
-	int* vertexes;
-	int numbers_of_vertexes_in_facets;
+	int* vertices;
+	int number_of_connections;
 } polygon_t;
 
 typedef struct data {
-	int count_of_vertexes;
-	int count_of_facets;
+	int amount_vertices;
+	int amount_polygons;
 	// matrix_t matrix_3d;
 	// polygon_t* polygons;
 } data_t;
 
 
 void get_parse_data (data_t* parse_data, char const* pathtofile);
-int get_vertices(FILE* fd, int count_of_vertexes, double** vertices);
-void get_polygons(FILE* fd, int count_of_facets, polygon_t* polygons);
+int get_vertices(FILE* fd, int amount_vertices, double** vertices);
+void get_polygons(FILE* fd, int amount_polygons, polygon_t* polygons);
 int get_count_vertex_polygon (char* pt_str);
 
-void ft_print_vertices(double* vertices, int count_of_facets);
-void ft_print_polygons(polygon_t polygons, int vertex_in_facet);
+void ft_print_vertices(double* vertices, int amount_polygons);
+void ft_print_polygons(polygon_t polygons);
 
 typedef enum Code_errors {
     SUCCESS = 1,

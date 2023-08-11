@@ -22,20 +22,20 @@ void glwidget::resizeGL(int weight, int height) {
 void glwidget::paintGL() {
 
     double* vert = (double*) malloc( 12 * sizeof(double));
-    vert[0] = -0.5;
-    vert[1] = -0.5;
+    vert[0] = -2.5;
+    vert[1] = -2.5;
     vert[2] = 0;
 
-    vert[3] = 0.5;
-    vert[4] = -0.5;
+    vert[3] = 2.5;
+    vert[4] = -2.5;
     vert[5] = 0;
 
-    vert[6] = 0.5;
-    vert[7] = 0.5;
+    vert[6] = 2.5;
+    vert[7] = 2.5;
     vert[8] = 0;
 
-    vert[9] = -0.5;
-    vert[10] = 0.5;
+    vert[9] = -2.5;
+    vert[10] = 2.5;
     vert[11] = 0;
 
 
