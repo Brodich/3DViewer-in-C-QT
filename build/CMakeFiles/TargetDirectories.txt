@@ -1,0 +1,4 @@
+/Users/ngocgrag/Brodich/3DViewer-in-C-QT/build/CMakeFiles/viewer.dir
+/Users/ngocgrag/Brodich/3DViewer-in-C-QT/build/CMakeFiles/edit_cache.dir
+/Users/ngocgrag/Brodich/3DViewer-in-C-QT/build/CMakeFiles/rebuild_cache.dir
+/Users/ngocgrag/Brodich/3DViewer-in-C-QT/build/CMakeFiles/viewer_autogen.dir
