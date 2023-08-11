@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget* parent)
 
   ft_print_vertices(vertices, parse_data.amount_vertices);
   int amount_vertices_to_connect = 4;
-  ft_print_polygons(polygons, amount_vertices_to_connect);
+  ft_print_polygons(polygons);
 
   //    glClearColor(1.0, 1.0, 1.0, 1.0);
 
