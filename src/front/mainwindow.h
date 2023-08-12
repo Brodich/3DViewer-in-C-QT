@@ -5,17 +5,13 @@
 
 #include <QMainWindow>
 
-//#define GL_SILENCE_DEPRECATION
-#define DIMENTION_COUNT 3
-
-extern "C" {
-#include "../back/parser.h"
-}
+#include "glwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
-}
+// сlass glwidget;
+}  // namespace Ui
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow {
@@ -28,13 +24,11 @@ class MainWindow : public QMainWindow {
 
  private slots:
   void openFile();
-
   void on_pushButton_2_clicked();
-
   void on_pushButton_3_pressed();
 
  private:
   Ui::MainWindow *ui;
-  const char* path;
+  const char *path;
 };
 #endif  // MAINWINDOW_H
