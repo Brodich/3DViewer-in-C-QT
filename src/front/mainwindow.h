@@ -10,7 +10,7 @@
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
-// сlass glwidget;
+//class glwidget;
 }  // namespace Ui
 QT_END_NAMESPACE
 

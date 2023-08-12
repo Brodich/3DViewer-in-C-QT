@@ -1,3 +1,4 @@
+#define GL_SILENCE_DEPRECATION
 #include "glwidget.h"
 
 void glwidget::initializeGL() {
@@ -11,38 +12,35 @@ void glwidget::resizeGL(int weight, int height) {
 }
 
 void glwidget::paintGL() {
-  // double* vert = (double*)malloc(12 * sizeof(double));
-  // vert[0] = -0.5;
-  // vert[1] = -0.5;
-  // vert[2] = 0;
+  double* vertices = (double*)malloc(12 * sizeof(double));
+  vertices[0] = -0.5;
+  vertices[1] = -0.5;
+  vertices[2] = 0;
 
-  // vert[3] = 0.5;
-  // vert[4] = -0.5;
-  // vert[5] = 0;
+  vertices[3] = 0.5;
+  vertices[4] = -0.5;
+  vertices[5] = 0;
 
-  // vert[6] = 0.5;
-  // vert[7] = 0.5;
-  // vert[8] = 0;
+  vertices[6] = 0.5;
+  vertices[7] = 0.5;
+  vertices[8] = 0;
 
-  // vert[9] = -0.5;
-  // vert[10] = 0.5;
-  // vert[11] = 0;
+  vertices[9] = -0.5;
+  vertices[10] = 0.5;
+  vertices[11] = 0;
 
-  // int* poly = (int*)malloc(4 * sizeof(int));
+  int* poly = (int*)malloc(4 * sizeof(int));
 
-  // poly[0] = 0;
-  // poly[1] = 1;
+  poly[0] = 0;
+  poly[1] = 1;
 
-  // poly[2] = 2;
-  // poly[3] = 3;
-
-  double* vert;  // вершины друг за другом
-  int* poly;    // полигоны
+  poly[2] = 2;
+  poly[3] = 3;
 
   glEnable(GL_DEPTH_TEST);
   glEnableClientState(GL_VERTEX_ARRAY);
 
-  glVertexPointer(DIMENTION_COUNT, GL_DOUBLE, 0, vert);
+  glVertexPointer(DIMENTION_COUNT, GL_DOUBLE, 0, vertices);
 
   glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, poly);
   glDisableClientState(GL_VERTEX_ARRAY);

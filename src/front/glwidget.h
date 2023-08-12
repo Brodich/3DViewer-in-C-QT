@@ -5,7 +5,6 @@
 #include <QOpenGLWidget>
 #include <QtWidgets>
 
-#define GL_SILENCE_DEPRECATION
 #define DIMENTION_COUNT 3
 
 extern "C" {
