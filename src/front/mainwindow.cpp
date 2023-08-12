@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
 
-  connect(ui->buttonOpenFile, SIGNAL(clicked()), this, SLOT(openFile()));
+  connect(ui->buttonOpenFile, SIGNAL(clicked()), this, SLOT(push_openFile()));
 
   // data_t parse_data = {0};
 
@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget* parent)
 
 MainWindow::~MainWindow() { delete ui; }
 
-void MainWindow::openFile() {
+void MainWindow::push_openFile() {
   // Открытие диалогового окна выбора файла
   QString filePath = QFileDialog::getOpenFileName(
       this, "Open File", QDir::homePath(), "All Files (*.*)");

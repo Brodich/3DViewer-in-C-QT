@@ -23,7 +23,7 @@ class MainWindow : public QMainWindow {
   void example();
 
  private slots:
-  void openFile();
+  void push_openFile();
   void on_pushButton_2_clicked();
   void on_pushButton_3_pressed();
 
