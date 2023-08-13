@@ -28,6 +28,8 @@ public:
 private slots:
     void on_open_file_clicked();
 
+    void on_translateX_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -39,6 +39,8 @@ set(PROJECT_SOURCES
         back/parser.h
         back/parser.c
 
+        back/affine.c
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

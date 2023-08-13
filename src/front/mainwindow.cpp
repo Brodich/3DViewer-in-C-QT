@@ -24,6 +24,9 @@ MainWindow::MainWindow(QWidget* parent)
   printf("amount_vertices: %d\n", parse_data.amount_vertices);
   printf("amount_polygons: %d\n", parse_data.amount_polygons);
 
+//
+
+
 //  ft_print_vertices(vertices, parse_data.amount_vertices);
 //  ft_print_polygons(polygons);
 
@@ -66,5 +69,12 @@ void MainWindow::on_open_file_clicked()
           get_polygons(fd, ui->modelWindow->parse_data.amount_polygons, &ui->modelWindow->polygons);
           fclose(fd);
   }
+}
+
+
+void MainWindow::on_translateX_clicked()
+{
+    translateX(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, 0.1);
+
 }
 

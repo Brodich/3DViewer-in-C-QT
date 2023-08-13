@@ -15,7 +15,27 @@ void glwidget::initializeGL() {
 }
 
 void glwidget::resizeGL(int weight, int height) {
-    glViewport(0, 0, weight, height);
+//    glViewport(0, 0, weight, height);
+
+    int w = 100;
+    int h = 100;
+
+//    glMatrixMode(GL_PROJECTION);
+//    glLoadIdentity();
+//    glViewport(-50, -50, w, h);
+//    glOrtho(40, 50, 200, 0, -1, 1);
+//    glMatrixMode(GL_MODELVIEW);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glScaled(2.0, 1.5, 1.0);
+
+//    glMatrixMode(GL_PROJECTION);
+//    glLoadIdentity();
+//    glViewport(0, 0, (GLint)w, (GLint)h);
+//    glOrtho(1, 1, 1, 1, -10, 1000);
+//    glMatrixMode(GL_MODELVIEW);
+
     paintGL();
 }
 
