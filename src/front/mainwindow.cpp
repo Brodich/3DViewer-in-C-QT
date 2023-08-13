@@ -14,19 +14,12 @@ MainWindow::MainWindow(QWidget* parent)
    char const* pathtofile =
    "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/cube2.obj";
 
-  get_parse_data(&parse_data, pathtofile);
 
 
   polygon_t polygons;       // free
   double* vertices = NULL;  // free
 
-  FILE* fd;
-  fd = fopen(pathtofile, "r");
 
-  get_vertices(fd, parse_data.amount_vertices, &vertices);
-  get_polygons(fd, parse_data.amount_polygons, &polygons);
-
-  fclose(fd);
 
   printf("amount_vertices: %d\n", parse_data.amount_vertices);
   printf("amount_polygons: %d\n", parse_data.amount_polygons);
@@ -37,8 +30,8 @@ MainWindow::MainWindow(QWidget* parent)
   //    glClearColor(1.0, 1.0, 1.0, 1.0);
 
 
-      if (polygons.vertices != NULL)
-      ui->modelWindow->paint();
+//      if ((polygons.vertices) != NULL)
+//      ui->modelWindow->paint();
 
   //    glwidget
   //    glwidget::paintGL();
@@ -52,3 +45,26 @@ MainWindow::MainWindow(QWidget* parent)
 }
 
 MainWindow::~MainWindow() { delete ui; }
+
+void MainWindow::on_open_file_clicked()
+{
+
+//    QString filePath = QFileDialog::getOpenFileName(
+//        this, "Open File", QDir::homePath(), "All Files (*.*)");
+
+//    std::string stdstrPath = filePath.toStdString();
+//    const char* pathtofile = stdstrPath.c_str();
+
+    char const* pathtofile =
+    "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/cube2.obj";
+
+    FILE* fd;
+    fd = fopen(pathtofile, "r");
+      if (fd != NULL) {
+          get_parse_data(&ui->modelWindow->parse_data, pathtofile);
+          get_vertices(fd, ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices);
+          get_polygons(fd, ui->modelWindow->parse_data.amount_polygons, &ui->modelWindow->polygons);
+          fclose(fd);
+  }
+}
+

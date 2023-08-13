@@ -3,6 +3,7 @@
 
 #include <QOpenGLFunctions>
 #include <QOpenGLWidget>
+#include <QtWidgets>
 
 #define GL_SILENCE_DEPRECATION
 

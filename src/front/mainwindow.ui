@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1079</width>
+    <height>813</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,11 +17,24 @@
    <widget class="glwidget" name="modelWindow">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>20</y>
+      <x>290</x>
+      <y>40</y>
       <width>450</width>
       <height>450</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="open_file">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>40</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Open file</string>
     </property>
    </widget>
   </widget>
@@ -30,7 +43,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1079</width>
      <height>24</height>
     </rect>
    </property>
