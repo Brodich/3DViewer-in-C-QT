@@ -12,6 +12,7 @@ void glwidget::resizeGL(int weight, int height) {
 }
 
 void glwidget::paintGL() {
+
   double* vertices = (double*)malloc(12 * sizeof(double));
   vertices[0] = -0.5;
   vertices[1] = -0.5;
@@ -30,7 +31,6 @@ void glwidget::paintGL() {
   vertices[11] = 0;
 
   int* poly = (int*)malloc(4 * sizeof(int));
-
   poly[0] = 0;
   poly[1] = 1;
 
@@ -45,7 +45,9 @@ void glwidget::paintGL() {
   glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, poly);
   glDisableClientState(GL_VERTEX_ARRAY);
 
+  
+
   update();
 }
 
-// void glwidget::paint() { paintGL(); }
+void glwidget::paint() { paintGL(); }

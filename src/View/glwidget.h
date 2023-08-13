@@ -8,7 +8,7 @@
 #define DIMENTION_COUNT 3
 
 extern "C" {
-#include "../back/parser.h"
+#include "../Model/parser.h"
 }
 
 class glwidget : public QOpenGLWidget {

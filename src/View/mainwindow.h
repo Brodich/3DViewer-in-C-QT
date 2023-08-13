@@ -23,11 +23,13 @@ class MainWindow : public QMainWindow {
   void example();
 
  private slots:
-  void push_openFile();
+  void on_openFile_clicked();
   void on_pushButton_2_clicked();
   void on_pushButton_3_pressed();
 
- private:
+  // void on_labelFileName_linkActivated(const QString &link);
+
+private:
   Ui::MainWindow *ui;
   const char *path;
 };

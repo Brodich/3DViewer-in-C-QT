@@ -18,27 +18,25 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS OpenGL)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui)
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/back
-    ${CMAKE_SOURCE_DIR}/front
+    ${CMAKE_SOURCE_DIR}/Model
+    ${CMAKE_SOURCE_DIR}/View
     ${CMAKE_SOURCE_DIR}
 )
 
 set(CMAKE_AUTOUIC_SEARCH_PATHS)
 
-
 set(PROJECT_SOURCES
 
-        front/main.cpp
-        front/mainwindow.cpp
-        front/mainwindow.h
-        front/mainwindow.ui
+    View/mainwindow.h
+    View/glwidget.h
+    Model/parser.h
 
-        front/glwidget.h
-        front/glwidget.cpp
+    View/main.cpp
+    View/mainwindow.cpp
+    View/glwidget.cpp
+    Model/parser.c
 
-        back/parser.h
-        back/parser.c
-
+    View/mainwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
