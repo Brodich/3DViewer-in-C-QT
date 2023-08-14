@@ -34,6 +34,8 @@ void ft_print_polygons(polygon_t polygons);
 
 
 void translateX(int amount_vertices, double** vertices, double value);
+void translateY(int amount_vertices, double** vertices, double value);
+void translateZ(int amount_vertices, double** vertices, double value);
 
 typedef enum Code_errors {
     SUCCESS = 1,

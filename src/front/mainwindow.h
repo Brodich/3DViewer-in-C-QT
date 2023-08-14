@@ -30,6 +30,12 @@ private slots:
 
     void on_translateX_clicked();
 
+    void on_translate_x_valueChanged(int arg1);
+
+    void on_translate_y_valueChanged(int arg1);
+
+    void on_translate_z_valueChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
 };

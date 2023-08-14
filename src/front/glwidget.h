@@ -24,6 +24,9 @@ public:
     polygon_t polygons = {0};
     double* vertices = NULL;
 
+    int xTrans = 0, yTrans = 0, zTrans = 0;
+
+
 protected:
     void initializeGL() override;
     void resizeGL(int weight, int height) override;
