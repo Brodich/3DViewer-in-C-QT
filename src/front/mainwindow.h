@@ -36,6 +36,7 @@ private slots:
 
     void on_translate_z_valueChanged(int arg1);
 
+
 private:
     Ui::MainWindow *ui;
 };
