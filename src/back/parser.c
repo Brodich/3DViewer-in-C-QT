@@ -162,6 +162,8 @@ int get_count_vertex_polygon(char* pt_str) {
 
 void get_parse_data(data_t* parse_data, const char* pathtofile) {
   FILE* fd;
+  parse_data->amount_polygons = 0;
+  parse_data->amount_vertices = 0;
   fd = fopen(pathtofile, "r");
   if (fd == NULL) {
     printf("Error not have been file \n");
@@ -179,6 +181,21 @@ void get_parse_data(data_t* parse_data, const char* pathtofile) {
   free(line);
   fclose(fd);
 }
+
+int get_max_vector(double* vertices, int amount_polygons) {
+  int max = 1;
+  int i = 0;
+
+  while (i < amount_polygons * 3) {
+    if(max < vertices[i]) {
+      max = vertices[i];
+    }
+    i++;
+  }
+  return (max);
+
+}
+
 
 void ft_print_vertices(double* vertices, int amount_polygons) {
   int i = 0;

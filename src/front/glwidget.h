@@ -25,6 +25,7 @@ public:
     double* vertices = NULL;
 
     int xTrans = 0, yTrans = 0, zTrans = 0;
+    int size;
 
 
 protected:

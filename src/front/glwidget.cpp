@@ -26,10 +26,15 @@ void glwidget::paintGL() {
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-1.0, 1.0, -1.0, 1.0, -10.0, 10.0);
+
+
+    glOrtho(-size, size, -size, size, -size, size);
     glMatrixMode(GL_MODELVIEW);
 
-    glEnable(GL_DEPTH_TEST);
+
+
+//    glEnable(GL_DEPTH_TEST);
+    initializeGL();
     glEnableClientState(GL_VERTEX_ARRAY);
 
     glVertexPointer(DIMENTION_COUNT, GL_DOUBLE, 0, vertices);

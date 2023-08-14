@@ -25,8 +25,7 @@ MainWindow::MainWindow(QWidget* parent)
     connect(ui->translate_z, SIGNAL(valueChanged(int)), ui->translate_slider_z, SLOT(setValue(int)));
 
 
-//  polygon_t polygons;       // free
-//  double* vertices = NULL;  // free
+
 
 
 
@@ -73,10 +72,14 @@ void MainWindow::on_open_file_clicked()
     FILE* fd;
     fd = fopen(pathtofile, "r");
       if (fd != NULL) {
+          free(ui->modelWindow->vertices);
+          free(ui->modelWindow->polygons.vertices);
+
           get_parse_data(&ui->modelWindow->parse_data, pathtofile);
           get_vertices(fd, ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices);
           get_polygons(fd, ui->modelWindow->parse_data.amount_polygons, &ui->modelWindow->polygons);
           fclose(fd);
+          ui->modelWindow->size = get_max_vector(ui->modelWindow->vertices, ui->modelWindow->parse_data.amount_vertices) * 1.5;
   }
 }
 
@@ -102,12 +105,14 @@ void MainWindow::on_translate_y_valueChanged(int arg1)
 {
     translateY(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, -ui->modelWindow->yTrans);
     translateY(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, ui->translate_y->value());
-    ui->modelWindow->yTrans = ui->translate_y->value();}
+    ui->modelWindow->yTrans = ui->translate_y->value();
+}
 
 
 void MainWindow::on_translate_z_valueChanged(int arg1)
 {
     translateZ(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, -ui->modelWindow->zTrans);
     translateZ(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, ui->translate_z->value());
-    ui->modelWindow->zTrans = ui->translate_z->value();}
+    ui->modelWindow->zTrans = ui->translate_z->value();
+}
 

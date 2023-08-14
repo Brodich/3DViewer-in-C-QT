@@ -31,6 +31,7 @@ int get_count_vertex_polygon (char* pt_str);
 void ft_print_vertices(double* vertices, int amount_polygons);
 void ft_print_polygons(polygon_t polygons);
 
+int get_max_vector(double* vertices, int amount_polygons);
 
 
 void translateX(int amount_vertices, double** vertices, double value);
