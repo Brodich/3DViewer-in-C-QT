@@ -37,19 +37,6 @@
      <string>Open file</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="translateX">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>210</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
    <widget class="QSlider" name="translate_slider_x">
     <property name="geometry">
      <rect>

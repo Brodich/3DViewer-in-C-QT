@@ -28,8 +28,6 @@ public:
 private slots:
     void on_open_file_clicked();
 
-    void on_translateX_clicked();
-
     void on_translate_x_valueChanged(int arg1);
 
     void on_translate_y_valueChanged(int arg1);

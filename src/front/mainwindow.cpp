@@ -84,14 +84,6 @@ void MainWindow::on_open_file_clicked()
 }
 
 
-void MainWindow::on_translateX_clicked()
-{
-
-    translateX(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, 0.1);
-
-}
-
-
 void MainWindow::on_translate_x_valueChanged(int arg1)
 {
 //    static int origin_x = ui->translate_x->value();
