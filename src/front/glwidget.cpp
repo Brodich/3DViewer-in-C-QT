@@ -15,8 +15,8 @@ void glwidget::initializeGL() {
 }
 
 void glwidget::resizeGL(int weight, int height) {
-    glViewport(0, 0, weight, height);
-    paintGL();
+//    glViewport(0, 0, weight, height);
+//    paintGL();
 }
 
 void glwidget::paintGL() {
@@ -27,8 +27,11 @@ void glwidget::paintGL() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
+//        glViewport(size, size, size, size);
 
-    glOrtho(-size, size, -size, size, -size, size);
+    glFrustum(-size, size, -size, size, size, -size);
+
+//    glOrtho(-size, size, -size, size, -size, size);
     glMatrixMode(GL_MODELVIEW);
 
 

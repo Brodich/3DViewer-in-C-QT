@@ -182,13 +182,13 @@ void get_parse_data(data_t* parse_data, const char* pathtofile) {
   fclose(fd);
 }
 
-int get_max_vector(double* vertices, int amount_polygons) {
-  int max = 1;
+double get_max_vector(double* vertices, int amount_polygons) {
+  double max = 1;
   int i = 0;
 
   while (i < amount_polygons * 3) {
-    if(max < vertices[i]) {
-      max = vertices[i];
+    if(fabs(max) < fabs(vertices[i])) {
+      max = fabs(vertices[i]);
     }
     i++;
   }

@@ -31,13 +31,19 @@ int get_count_vertex_polygon (char* pt_str);
 void ft_print_vertices(double* vertices, int amount_polygons);
 void ft_print_polygons(polygon_t polygons);
 
-int get_max_vector(double* vertices, int amount_polygons);
+double get_max_vector(double* vertices, int amount_polygons);
 
 
 void translateX(int amount_vertices, double** vertices, double value);
 void translateY(int amount_vertices, double** vertices, double value);
 void translateZ(int amount_vertices, double** vertices, double value);
 
+
+void rotateX(int amount_vertices, double** vertices, double angle);
+
+
+
+void scale_shape(int amount_vertices, double** vertices, int scale);
 typedef enum Code_errors {
     SUCCESS = 1,
     VERTEX_MISS = -1,

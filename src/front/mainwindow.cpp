@@ -25,7 +25,22 @@ MainWindow::MainWindow(QWidget* parent)
     connect(ui->translate_z, SIGNAL(valueChanged(int)), ui->translate_slider_z, SLOT(setValue(int)));
 
 
+    // Rotate
 
+    connect(ui->rotate_slider_x, SIGNAL(valueChanged(int)), ui->rotate_x, SLOT(setValue(int)));
+    connect(ui->rotate_x, SIGNAL(valueChanged(int)), ui->rotate_slider_x, SLOT(setValue(int)));
+
+    connect(ui->rotate_slider_y, SIGNAL(valueChanged(int)), ui->rotate_y, SLOT(setValue(int)));
+    connect(ui->rotate_y, SIGNAL(valueChanged(int)), ui->rotate_slider_y, SLOT(setValue(int)));
+
+    connect(ui->rotate_slider_z, SIGNAL(valueChanged(int)), ui->rotate_z, SLOT(setValue(int)));
+    connect(ui->rotate_z, SIGNAL(valueChanged(int)), ui->rotate_slider_z, SLOT(setValue(int)));
+
+
+    // Scale
+
+    connect(ui->scale_slider, SIGNAL(valueChanged(int)), ui->scale, SLOT(setValue(int)));
+    connect(ui->scale, SIGNAL(valueChanged(int)), ui->scale_slider, SLOT(setValue(int)));
 
 
 
@@ -67,7 +82,7 @@ void MainWindow::on_open_file_clicked()
 //    const char* pathtofile = stdstrPath.c_str();
 
     char const* pathtofile =
-    "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/cube2.obj";
+    "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/Squirrel.obj";
 
     FILE* fd;
     fd = fopen(pathtofile, "r");
@@ -79,7 +94,7 @@ void MainWindow::on_open_file_clicked()
           get_vertices(fd, ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices);
           get_polygons(fd, ui->modelWindow->parse_data.amount_polygons, &ui->modelWindow->polygons);
           fclose(fd);
-          ui->modelWindow->size = get_max_vector(ui->modelWindow->vertices, ui->modelWindow->parse_data.amount_vertices) * 1.5;
+          ui->modelWindow->size = get_max_vector(ui->modelWindow->vertices, ui->modelWindow->parse_data.amount_vertices) * 2.;
   }
 }
 
@@ -106,5 +121,21 @@ void MainWindow::on_translate_z_valueChanged(int arg1)
     translateZ(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, -ui->modelWindow->zTrans);
     translateZ(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, ui->translate_z->value());
     ui->modelWindow->zTrans = ui->translate_z->value();
+}
+
+
+void MainWindow::on_rotate_x_valueChanged(int arg1)
+{
+    rotateX(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, -ui->modelWindow->xRot);
+    rotateX(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, ui->rotate_x->value());
+    ui->modelWindow->xRot = ui->rotate_x->value();
+}
+
+
+void MainWindow::on_scale_valueChanged(int arg1)
+{
+    scale_shape(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, -ui->modelWindow->scale);
+    scale_shape(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, ui->scale->value());
+    ui->modelWindow->scale = ui->scale->value();
 }
 
