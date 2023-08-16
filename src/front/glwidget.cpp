@@ -29,9 +29,9 @@ void glwidget::paintGL() {
 
 //        glViewport(size, size, size, size);
 
-    glFrustum(-size, size, -size, size, size, -size);
+//    glFrustum(-size, size, -size, size, size, -size);
 
-//    glOrtho(-size, size, -size, size, -size, size);
+    glOrtho(-size, size, -size, size, -size, size);
     glMatrixMode(GL_MODELVIEW);
 
 

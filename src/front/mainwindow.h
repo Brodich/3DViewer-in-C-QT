@@ -35,8 +35,11 @@ private slots:
     void on_translate_z_valueChanged(int arg1);
 
     void on_rotate_x_valueChanged(int arg1);
+    void on_rotate_y_valueChanged(int arg1);
+    void on_rotate_z_valueChanged(int arg1);
 
     void on_scale_valueChanged(int arg1);
+
 
 private:
     Ui::MainWindow *ui;

@@ -35,11 +35,58 @@ void rotateX(int amount_vertices, double** vertices, double angle) {
 	int xyz = 0;
     double rot = angle * M_PI / 180;
 	while (i < amount_vertices) {
+		double y_vector = (*vertices)[(i * 3) + 1];
+		double z_vector = (*vertices)[(i * 3) + 2];
+
 		while (xyz < 3) {
+
 			if (xyz == 1) { // y 
-                (*vertices)[(i * 3) + xyz] = (*vertices)[(i * 3) + 1] * cos(rot) - (*vertices)[(i * 3) + 2] * sin(rot);
+                (*vertices)[(i * 3) + xyz] = y_vector * cos(rot) + z_vector * sin(rot);
 			} else if (xyz == 2) { // z
-                (*vertices)[(i * 3) + xyz] = -(*vertices)[(i * 3) + 1] * sin(rot) + (*vertices)[(i * 3) + 2] * cos(rot);
+                (*vertices)[(i * 3) + xyz] = -y_vector * sin(rot) + z_vector * cos(rot);
+			}
+			xyz++;
+		}
+		xyz = 0;
+		i++;
+	}
+}
+
+void rotateY(int amount_vertices, double** vertices, double angle) {
+	int i = 0;
+	int xyz = 0;
+    double rot = angle * M_PI / 180;
+	while (i < amount_vertices) {
+		double x_vector = (*vertices)[(i * 3)];
+		double z_vector = (*vertices)[(i * 3) + 2];
+
+		while (xyz < 3) {
+
+            if (xyz == 0) { // x
+                (*vertices)[(i * 3) + xyz] = x_vector * cos(rot) + z_vector * sin(rot);
+			} else if (xyz == 2) { // z
+                (*vertices)[(i * 3) + xyz] = -x_vector * sin(rot) + z_vector * cos(rot);
+			}
+			xyz++;
+		}
+		xyz = 0;
+		i++;
+	}
+}
+
+void rotateZ(int amount_vertices, double** vertices, double angle) {
+	int i = 0;
+	int xyz = 0;
+    double rot = angle * M_PI / 180;
+	while (i < amount_vertices) {
+		double x_vector = (*vertices)[(i * 3)];
+		double y_vector = (*vertices)[(i * 3) + 1];
+
+		while (xyz < 3) {
+			if (xyz == 0) { // x
+                (*vertices)[(i * 3) + xyz] = x_vector * cos(rot) - y_vector * sin(rot);
+			} else if (xyz == 1) { // y
+                (*vertices)[(i * 3) + xyz] = x_vector * sin(rot) + y_vector * cos(rot);
 			}
 			xyz++;
 		}
@@ -49,12 +96,24 @@ void rotateX(int amount_vertices, double** vertices, double angle) {
 }
 
 void scale_shape(int amount_vertices, double** vertices, int scale) {
-	double scaled = (double)scale / 10.0;
+//	double scaled = (double)scale / 10.0;
 	int i = 0;
 
 	while (i < amount_vertices * 3) {
-		(*vertices)[i] = (*vertices)[i] * scaled;
+        (*vertices)[i] = (*vertices)[i] * scale;
 		i++;
 	}
 	
+}
+
+
+void divide_shape(int amount_vertices, double** vertices, int scale) {
+//	double scaled = (double)scale / 10.0;
+    int i = 0;
+
+    while (i < amount_vertices * 3) {
+        (*vertices)[i] = (*vertices)[i] / scale;
+        i++;
+    }
+
 }

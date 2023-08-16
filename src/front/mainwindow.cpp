@@ -82,7 +82,7 @@ void MainWindow::on_open_file_clicked()
 //    const char* pathtofile = stdstrPath.c_str();
 
     char const* pathtofile =
-    "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/Squirrel.obj";
+    "/Users/ngocgrag/Brodich/3DViewer-in-C-QT/src/assets/cube2.obj";
 
     FILE* fd;
     fd = fopen(pathtofile, "r");
@@ -93,8 +93,20 @@ void MainWindow::on_open_file_clicked()
           get_parse_data(&ui->modelWindow->parse_data, pathtofile);
           get_vertices(fd, ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices);
           get_polygons(fd, ui->modelWindow->parse_data.amount_polygons, &ui->modelWindow->polygons);
+
           fclose(fd);
-          ui->modelWindow->size = get_max_vector(ui->modelWindow->vertices, ui->modelWindow->parse_data.amount_vertices) * 2.;
+
+          ui->modelWindow->size = get_max_vector(ui->modelWindow->vertices, ui->modelWindow->parse_data.amount_vertices) * 3.;
+
+          ui->rotate_x->setValue(0);
+          ui->rotate_y->setValue(0);
+          ui->rotate_z->setValue(0);
+          ui->translate_x->setValue(0);
+          ui->translate_y->setValue(0);
+          ui->translate_z->setValue(0);
+          ui->scale->setValue(0);
+
+
   }
 }
 
@@ -123,7 +135,7 @@ void MainWindow::on_translate_z_valueChanged(int arg1)
     ui->modelWindow->zTrans = ui->translate_z->value();
 }
 
-
+// rotate
 void MainWindow::on_rotate_x_valueChanged(int arg1)
 {
     rotateX(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, -ui->modelWindow->xRot);
@@ -131,11 +143,29 @@ void MainWindow::on_rotate_x_valueChanged(int arg1)
     ui->modelWindow->xRot = ui->rotate_x->value();
 }
 
+void MainWindow::on_rotate_y_valueChanged(int arg1)
+{
+    rotateY(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, -ui->modelWindow->yRot);
+    rotateY(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, ui->rotate_y->value());
+    ui->modelWindow->yRot = ui->rotate_y->value();
+}
+
+
+
+void MainWindow::on_rotate_z_valueChanged(int arg1)
+{
+    rotateZ(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, -ui->modelWindow->zRot);
+    rotateZ(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, ui->rotate_z->value());
+    ui->modelWindow->zRot = ui->rotate_z->value();
+}
+
 
 void MainWindow::on_scale_valueChanged(int arg1)
 {
-    scale_shape(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, -ui->modelWindow->scale);
+    divide_shape(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, ui->modelWindow->scale);
     scale_shape(ui->modelWindow->parse_data.amount_vertices, &ui->modelWindow->vertices, ui->scale->value());
     ui->modelWindow->scale = ui->scale->value();
 }
+
+
 
