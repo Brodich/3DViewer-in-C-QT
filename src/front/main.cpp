@@ -1,15 +1,14 @@
-#include "mainwindow.h"
-
 #include <QApplication>
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.setWindowTitle("3DViewer");
-    w.show();
-    // Need for double number dot instead of comma
-      setlocale(LC_NUMERIC, "C");
+#include "mainwindow.h"
 
-    return a.exec();
+int main(int argc, char *argv[]) {
+  QApplication a(argc, argv);
+  MainWindow w;
+  w.setWindowTitle("3DViewer");
+  w.show();
+  // Need for double number dot instead of comma
+  setlocale(LC_NUMERIC, "C");
+
+  return a.exec();
 }
